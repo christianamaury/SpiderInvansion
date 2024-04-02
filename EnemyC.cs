@@ -68,7 +68,6 @@ public class EnemyC : MonoBehaviour
         enemyMovement();
 
        
-        
     }
 
     //Removed from the parameters the Vector3 hitpoint
@@ -137,7 +136,7 @@ public class EnemyC : MonoBehaviour
         enemyAnim.SetBool("attackPlayer", false);
     }
 
-    //When Colliders enters..
+    //When Colliders enters.. Attack Player
     public void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
@@ -158,6 +157,7 @@ public class EnemyC : MonoBehaviour
         }
     }
 
+    //Stop attacking player;
     public void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Player")
