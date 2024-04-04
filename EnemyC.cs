@@ -70,8 +70,23 @@ public class EnemyC : MonoBehaviour
        
     }
 
+    public void EnemyDeath()
+    {
+        isEnemyDead = true;
+        //Needs to be tested it.. 
+        capsuleCollider.isTrigger = true;
+        //Playing Death Animation for the Enemy; 
+        enemyAnim.SetBool("isEnemyDead", true);
+        //anim.Dead animation..
+        //play death audio();
+
+        //Destroying EnemyObject; 
+        Destroy(gameObject, 2f);
+
+    }
+
     //Removed from the parameters the Vector3 hitpoint
-    public void EnemyTakeDamage(int amount)
+    public void EnemyTakeDamage(float amount)
     {
         //If Enemy is not Dead yet..
         if(isEnemyDead)
@@ -93,24 +108,10 @@ public class EnemyC : MonoBehaviour
         //Enemy Health
         if(currentEnemyHealth <= 0)
         {
-           //Enemy Death Class Here;
+            //Enemy Death Class Here;
+            EnemyDeath();
 
         }
-    }
-
-    public void EnemyDeath()
-    {
-        isEnemyDead = true;
-        //Needs to be tested it.. 
-        capsuleCollider.isTrigger = true;
-        //Playing Death Animation for the Enemy; 
-        enemyAnim.SetBool("isEnemyDead", true);
-        //anim.Dead animation..
-        //play death audio();
-        
-        //Destroying EnemyObject; 
-        Destroy(gameObject, 2f);
-
     }
 
     public void enemyMovement()
@@ -168,4 +169,6 @@ public class EnemyC : MonoBehaviour
             stoppingAttackAnimation();
         }
     }
+
+
 }

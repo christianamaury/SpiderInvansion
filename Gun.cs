@@ -8,7 +8,7 @@ public class Gun : MonoBehaviour
     public static Gun Instance {get; set;}
   
     //Weapong Damage; 
-    public float damage = 10f;
+    public float gunDamage = 10f;
 
     //Range in order to be able to shoot;
     public float range = 100f;
@@ -33,8 +33,28 @@ public class Gun : MonoBehaviour
         }
     }
 
+    
+
     //Raycasting to shoot from our camera to the impact point;
-    public void Shoot(){
+    public void Shoot()
+    {
+        RaycastHit hit;
+        //Shoot from the angle that we're facing..
+        //Returns true if we actuall hit something; //Check if we hit something..
+        if (Physics.Raycast(gunEndBarrel.transform.position, gunEndBarrel.transform.forward, out hit, range))
+        {
+            //Name of the object that we did hit
+            Debug.Log(hit.transform.name);
+
+            //Looking for the target with the EnemyC Component class on them.
+            EnemyC target = hit.transform.GetComponent<EnemyC>();
+
+            if (target != null)
+            {
+                //Passing our Damage Variable;
+                EnemyC.Instance.EnemyTakeDamage(gunDamage);
+            }
+        }
 
     }
 }
