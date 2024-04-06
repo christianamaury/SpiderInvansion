@@ -10,16 +10,26 @@ public class Gun : MonoBehaviour
     //Weapong Damage; 
     public float gunDamage = 10f;
 
+    public ParticleSystem gunParticle; 
+
     //Range in order to be able to shoot;
     public float range = 100f;
 
     //Shoot from this Transform Game Object;
-    public Transform gunEndBarrel; 
+    public Transform gunEndBarrel;
+
+    private Animator anim;
+
+    private void Awake()
+    {
+        Instance = this; 
+    }
 
     // Start is called before the first frame update;
     void Start()
     {
-        
+        //Reference of the Player Animator Component; 
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,11 +43,19 @@ public class Gun : MonoBehaviour
         }
     }
 
-    
+    public void playerShootingAnimation()
+    {
 
+    }
+    
     //Raycasting to shoot from our camera to the impact point;
     public void Shoot()
     {
+        //Playing player animation; 
+
+        //Playing Gun Particle; 
+        gunParticle.Play();
+
         RaycastHit hit;
         //Shoot from the angle that we're facing..
         //Returns true if we actuall hit something; //Check if we hit something..
