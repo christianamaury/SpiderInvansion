@@ -10,6 +10,9 @@ public class Gun : MonoBehaviour
     //Weapong Damage; 
     public float gunDamage = 10f;
 
+    //isShooting variable for the animation;
+    public bool isPlayerShooting = false;
+
     public ParticleSystem gunParticle; 
 
     //Range in order to be able to shoot;
@@ -39,18 +42,26 @@ public class Gun : MonoBehaviour
         //For the Mobile Environment needs to add when a button is click
         if (Input.GetButtonDown("Fire1"))
         {
+            playerShootingAnimation();
             Shoot();
         }
+
+        //Player isn't shooting anymore: Needs to be tested it; 
+        isPlayerShooting = false;
     }
 
     public void playerShootingAnimation()
     {
-
+        
+        anim.SetBool("isShooting",isPlayerShooting);
     }
     
     //Raycasting to shoot from our camera to the impact point;
     public void Shoot()
     {
+        //Bool set to True since player is actually shooting; 
+        isPlayerShooting = true;
+
         //Playing player animation; 
 
         //Playing Gun Particle; 
