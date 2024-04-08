@@ -13,7 +13,10 @@ public class Gun : MonoBehaviour
     //isShooting variable for the animation;
     public bool isPlayerShooting = false;
 
-    public ParticleSystem gunParticle; 
+    public ParticleSystem gunParticle;
+
+    //Bullet impact effect on the Enemy;
+    public GameObject impactEffect;
 
     //Range in order to be able to shoot;
     public float range = 100f;
@@ -64,7 +67,7 @@ public class Gun : MonoBehaviour
 
         //Playing player animation; 
 
-        //Playing Gun Particle; 
+        //Playing Gun Particle; Effect needs to be change.. 
         gunParticle.Play();
 
         RaycastHit hit;
@@ -80,9 +83,14 @@ public class Gun : MonoBehaviour
 
             if (target != null)
             {
+                //Instantiate the impact gun bullet effect on the enemy;
+                //Quaternion lookRotation can also be hit.normal
+                Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.point));
+
                 //Passing our Damage Variable;
                 EnemyC.Instance.EnemyTakeDamage(gunDamage);
             }
+
         }
 
     }
